@@ -122,8 +122,10 @@ public class MainActivity extends AppCompatActivity {
                     )
             );
         } else if (fromEtherium.isChecked() && toReal.isChecked()) {
+            getData("ETH-BRL")
             outputValue.setText(
                     String.valueOf(
+
                             Double.parseDouble(inputValue.getText().toString()) * 1.11
                     )
             );
@@ -143,13 +145,14 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void getData (View view){
+    public void getData (String cot){
 
         ProgressDialog progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Consultando Cotação...");
         progressDialog.show();
 
-        Call<Coin> call = new RetrofitConfig().getCoinService().getCoin(inputValue.getText().toString());
+
+        Call<Coin> call = new RetrofitConfig().getCoinService().getCoin(cot);
         call.enqueue(new Callback<Coin>() {
 
             @Override
@@ -158,6 +161,7 @@ public class MainActivity extends AppCompatActivity {
                     Coin coin = response.body();
                     progressDialog.dismiss();
                     gCoin = coin;
+
                 }
             }
 
