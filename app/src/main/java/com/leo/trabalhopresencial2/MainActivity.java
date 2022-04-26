@@ -122,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
                     )
             );
         } else if (fromEtherium.isChecked() && toReal.isChecked()) {
-            getData("ETH-BRL")
+            getData("ETH-BRL");
             outputValue.setText(
                     String.valueOf(
 
