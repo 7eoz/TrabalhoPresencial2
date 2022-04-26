@@ -126,7 +126,7 @@ public class MainActivity extends AppCompatActivity {
             outputValue.setText(
                     String.valueOf(
 
-                            Double.parseDouble(inputValue.getText().toString()) * 1.11
+                            Double.parseDouble(inputValue.getText().toString()) *gCoin.getAsk()
                     )
             );
         } else if (fromEtherium.isChecked() && toBitcoin.isChecked()) {
