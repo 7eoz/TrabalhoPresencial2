@@ -74,16 +74,16 @@
             android:text="Bitcoin" />
 
         <RadioButton
-            android:id="@+id/fromEtherium"
+            android:id="@+id/fromEthereum"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Etherium" />
+            android:text="Ethereum" />
     </RadioGroup>
 
     <RadioGroup
         android:id="@+id/radioGroup2"
-        android:layout_width="89dp"
-        android:layout_height="246dp"
+        android:layout_width="96dp"
+        android:layout_height="249dp"
         android:layout_marginTop="12dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.759"
@@ -115,10 +115,10 @@
             android:text="Bitcoin" />
 
         <RadioButton
-            android:id="@+id/toEtherium"
+            android:id="@+id/toEthereum"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Etherium" />
+            android:text="Ethereum" />
     </RadioGroup>
 
     <TextView

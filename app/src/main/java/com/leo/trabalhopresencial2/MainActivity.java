@@ -21,8 +21,8 @@ import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
-    RadioButton fromReal, fromDollar, fromEuro, fromBitcoin, fromEtherium, toReal, toDollar, toEuro,
-            toBitcoin, toEtherium;
+    RadioButton fromReal, fromDollar, fromEuro, fromBitcoin, fromEthereum, toReal, toDollar, toEuro,
+            toBitcoin, toEthereum;
     EditText inputValue;
     Button convertButton;
     TextView outputValue;
@@ -41,12 +41,12 @@ public class MainActivity extends AppCompatActivity {
         fromDollar = findViewById(R.id.from_dollar);
         fromEuro = findViewById(R.id.from_euro);
         fromBitcoin = findViewById(R.id.fromBitcoin);
-        fromEtherium = findViewById(R.id.fromEtherium);
+        fromEthereum = findViewById(R.id.fromEthereum);
         toReal = findViewById(R.id.to_real);
         toDollar = findViewById(R.id.to_dollar);
         toEuro = findViewById(R.id.to_euro);
         toBitcoin = findViewById(R.id.toBitcoin);
-        toEtherium = findViewById(R.id.toEtherium);
+        toEthereum = findViewById(R.id.toEthereum);
     }
 
     public void convert(View view) {
@@ -54,44 +54,56 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this, "Please input a value to be converted", Toast.LENGTH_SHORT).show();
         } else if (fromReal.isChecked() && toDollar.isChecked()) {
             getData("BRL-USD");
+        }else if (fromReal.isChecked() && toEuro.isChecked()) {
+            getData("BRL-EUR");
+        } else if (fromReal.isChecked() && toBitcoin.isChecked()) {
+            getData("BRL-BTC");
+         }else if (fromReal.isChecked() && toEthereum.isChecked()) {
+            getData("ETH-BRL");
         } else if (fromDollar.isChecked() && toReal.isChecked()) {
             getData("USD-BRL");
-        } else if (fromReal.isChecked() && toEuro.isChecked()) {
-            getData("BRL-EUR");
+        }  else if (fromDollar.isChecked() && toEuro.isChecked()) {
+            getData("USD-EUR");
+        } else if (fromDollar.isChecked() && toBitcoin.isChecked()) {
+            getData("USD-BTC");
+        } else if (fromDollar.isChecked() && toEthereum.isChecked()) {
+            getData("ETH-USD");
         } else if (fromEuro.isChecked() && toReal.isChecked()) {
             getData("EUR-BRL");
-        } else if (fromDollar.isChecked() && toEuro.isChecked()) {
-            getData("USD-EUR");
         } else if (fromEuro.isChecked() && toDollar.isChecked()) {
             getData("EUR-USD");
+        } else if (fromEuro.isChecked() && toBitcoin.isChecked()) {
+            getData("EUR-BTC");
+        } else if (fromEuro.isChecked() && toEthereum.isChecked()) {
+            getData("ETH-EUR");
         } else if (fromBitcoin.isChecked() && toDollar.isChecked()) {
-            getData("EUR-BRL");
+            getData("USD-BTC");
         } else if (fromBitcoin.isChecked() && toEuro.isChecked()) {
-            getData("BTC-EUR");
+            getData("EUR-BTC");
         } else if (fromBitcoin.isChecked() && toReal.isChecked()) {
-            getData("BTC-BRL");
-        } else if (fromBitcoin.isChecked() && toEtherium.isChecked()) {
+            getData("BRL-BTC");
+        } else if (fromBitcoin.isChecked() && toEthereum.isChecked()) {
             getData("BTC-ETC");
-        } else if (fromEtherium.isChecked() && toDollar.isChecked()) {
-            getData("ETC-USD");
-        } else if (fromEtherium.isChecked() && toEuro.isChecked()) {
-            getData("ETC-EUR");
-        } else if (fromEtherium.isChecked() && toReal.isChecked()) {
+        } else if (fromEthereum.isChecked() && toDollar.isChecked()) {
+            getData("ETH-USD");
+        } else if (fromEthereum.isChecked() && toEuro.isChecked()) {
+            getData("ETH-EUR");
+        } else if (fromEthereum.isChecked() && toReal.isChecked()) {
             getData("ETH-BRL");
-        } else if (fromEtherium.isChecked() && toBitcoin.isChecked()) {
+        } else if (fromEthereum.isChecked() && toBitcoin.isChecked()) {
             getData("ETC-BTC");
         }
         else if (fromEuro.isChecked() && toEuro.isChecked() ||
                 fromReal.isChecked() && toReal.isChecked() ||
                 fromDollar.isChecked() && toDollar.isChecked() ||
                 fromBitcoin.isChecked() && toBitcoin.isChecked() ||
-                fromEtherium.isChecked() && toEtherium.isChecked()) {
+                fromEthereum.isChecked() && toEthereum.isChecked()) {
             Toast.makeText(this, "Please select 2 different currencies", Toast.LENGTH_SHORT).show();
         } else if (!fromEuro.isChecked() || !toEuro.isChecked() ||
                 !fromReal.isChecked() || !toReal.isChecked() ||
                 !fromDollar.isChecked() || !toDollar.isChecked() ||
                 !fromBitcoin.isChecked() || !toBitcoin.isChecked() ||
-                !fromEtherium.isChecked() || !toEtherium.isChecked()) {
+                !fromEthereum.isChecked() || !toEthereum.isChecked()) {
             Toast.makeText(this, "Please select a 'From' and a 'To' currency", Toast.LENGTH_SHORT).show();
         }
     }
@@ -106,17 +118,35 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<Coin[]> call, Response<Coin[]> response) {
                 if(response.isSuccessful()){
-                    Coin[] coin = response.body();
-                    progressDialog.dismiss();
-                    ask = Double.parseDouble(coin[0].getAsk());
-                    outputValue.setText(
-                            String.valueOf(
-                                    format.format(
-                                            Double.parseDouble(
-                                                    inputValue.getText().toString()) * ask
-                                    )
-                            )
-                    );
+
+                    if(fromBitcoin.isChecked() && toEthereum.isChecked() ||
+                       fromEthereum.isChecked() && toBitcoin.isChecked()) {
+
+                    } else if(fromBitcoin.isChecked() || toEthereum.isChecked()){
+                        Coin[] coin = response.body();
+                        progressDialog.dismiss();
+                        ask = Double.parseDouble(coin[0].getAsk());
+                        outputValue.setText(
+                                String.valueOf(
+                                        format.format(
+                                                Double.parseDouble(
+                                                        inputValue.getText().toString()) / ask
+                                        )
+                                )
+                        );
+                    } else {
+                        Coin[] coin = response.body();
+                        progressDialog.dismiss();
+                        ask = Double.parseDouble(coin[0].getAsk());
+                        outputValue.setText(
+                                String.valueOf(
+                                        format.format(
+                                                Double.parseDouble(
+                                                        inputValue.getText().toString()) * ask
+                                        )
+                                )
+                        );
+                    }
                 }
             }
 
