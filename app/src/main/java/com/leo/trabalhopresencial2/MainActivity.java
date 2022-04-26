@@ -167,7 +167,7 @@ public class MainActivity extends AppCompatActivity {
 
         Call<Coin> call = new RetrofitConfig().getCoinService().getCoin(cot);
         call.enqueue(new Callback<Coin>() {
-
+//
             @Override
             public void onResponse(Call<Coin> call, Response<Coin> response) {
                 if(response.isSuccessful()){
