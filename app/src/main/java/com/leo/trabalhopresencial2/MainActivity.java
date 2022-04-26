@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import API.RetrofitConfig;
+import Model.Coin;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -23,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
     EditText inputValue;
     Button convertButton;
     TextView outputValue;
+    Coin gCoin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -144,24 +146,23 @@ public class MainActivity extends AppCompatActivity {
     public void getData (View view){
 
         ProgressDialog progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage("Consultando endereço...");
+        progressDialog.setMessage("Consultando Cotação...");
         progressDialog.show();
 
-        Call<> call = new RetrofitConfig().getCoinService().getCoin(input.getText().toString());
+        Call<Coin> call = new RetrofitConfig().getCoinService().getCoin(inputValue.getText().toString());
         call.enqueue(new Callback<Coin>() {
 
             @Override
-            public void onResponse(Call<Address> call, Response<Address> response) {
+            public void onResponse(Call<Coin> call, Response<Coin> response) {
                 if(response.isSuccessful()){
-                    Address address = response.body();
+                    Coin coin = response.body();
                     progressDialog.dismiss();
-                    output.setText(address.getLogradouro() +" - "+ address.getComplemento()+ "\n"
-                            + address.getBairro() + "\n" + address.getLocalidade()+" - "+address.getUf());
+                    gCoin = coin;
                 }
             }
 
             @Override
-            public void onFailure(Call<Address> call, Throwable t) {
+            public void onFailure(Call<Coin> call, Throwable t) {
 
             }
         });
