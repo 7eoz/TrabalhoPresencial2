@@ -2,6 +2,7 @@ package com.leo.trabalhopresencial2;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -9,6 +10,10 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -77,5 +82,31 @@ public class MainActivity extends AppCompatActivity {
                 fromDollar.isChecked() && toDollar.isChecked()) {
             Toast.makeText(this, "Please select 2 different currencies", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    public void getData (View view){
+
+        ProgressDialog progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Consultando endereço...");
+        progressDialog.show();
+
+        Call<> call = new RetrofitConfig().getCEPService().getFullAddress(input.getText().toString());
+        call.enqueue(new Callback<Address>() {
+
+            @Override
+            public void onResponse(Call<Address> call, Response<Address> response) {
+                if(response.isSuccessful()){
+                    Address address = response.body();
+                    progressDialog.dismiss();
+                    output.setText(address.getLogradouro() +" - "+ address.getComplemento()+ "\n"
+                            + address.getBairro() + "\n" + address.getLocalidade()+" - "+address.getUf());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Address> call, Throwable t) {
+
+            }
+        });
     }
 }
