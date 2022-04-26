@@ -10,8 +10,8 @@ public class RetrofitConfig {
     public RetrofitConfig(){
         this.retrofit = new Retrofit.Builder()
                 //.baseUrl("https://viacep.com.br/ws/")
-                .baseUrl("https://jsonplaceholder.typicode.com")
-                .addConverterFactory(GsonConverterFactory.create())
+                //.baseUrl("https://jsonplaceholder.typicode.com/")
+                .baseUrl("https://economia.awesomeapi.com.br/")
                 .build();
     }
     public CoinService getCoinService(){

@@ -53,84 +53,84 @@ public class MainActivity extends AppCompatActivity {
             getData("BRL-USD");
             outputValue.setText(
                     String.valueOf(
-                            Double.parseDouble(inputValue.getText().toString()) * gcoin.getAsk()
+                            Double.parseDouble(inputValue.getText().toString()) * gCoin.getAsk()
                     )
             );
         } else if (fromDollar.isChecked() && toReal.isChecked()) {
             getData("USD-BRL");
             outputValue.setText(
                     String.valueOf(
-                            Double.parseDouble(inputValue.getText().toString()) * gcoin.getAsk()
+                            Double.parseDouble(inputValue.getText().toString()) * gCoin.getAsk()
                     )
             );
         } else if (fromReal.isChecked() && toEuro.isChecked()) {
             getData("BRL-EUR");
             outputValue.setText(
                     String.valueOf(
-                            Double.parseDouble(inputValue.getText().toString()) * gcoin.getAsk()
+                            Double.parseDouble(inputValue.getText().toString()) * gCoin.getAsk()
                     )
             );
         } else if (fromEuro.isChecked() && toReal.isChecked()) {
             getData("EUR-BRL");
             outputValue.setText(
                     String.valueOf(
-                            Double.parseDouble(inputValue.getText().toString())  * gcoin.getAsk()
+                            Double.parseDouble(inputValue.getText().toString())  * gCoin.getAsk()
                     )
             );
         } else if (fromDollar.isChecked() && toEuro.isChecked()) {
             getData("USD-EUR");
             outputValue.setText(
                     String.valueOf(
-                            Double.parseDouble(inputValue.getText().toString()) * gcoin.getAsk()
+                            Double.parseDouble(inputValue.getText().toString()) * gCoin.getAsk()
                     )
             );
         } else if (fromEuro.isChecked() && toDollar.isChecked()) {
             getData("EUR-USD");
             outputValue.setText(
                     String.valueOf(
-                            Double.parseDouble(inputValue.getText().toString()) * gcoin.getAsk()
+                            Double.parseDouble(inputValue.getText().toString()) * gCoin.getAsk()
                     )
             );
         } else if (fromBitcoin.isChecked() && toDollar.isChecked()) {
             getData("EUR-BRL");
             outputValue.setText(
                     String.valueOf(
-                            Double.parseDouble(inputValue.getText().toString()) * gcoin.getAsk()
+                            Double.parseDouble(inputValue.getText().toString()) * gCoin.getAsk()
                     )
             );
         } else if (fromBitcoin.isChecked() && toEuro.isChecked()) {
             getData("BTC-EUR");
             outputValue.setText(
                     String.valueOf(
-                            Double.parseDouble(inputValue.getText().toString()) * gcoin.getAsk()
+                            Double.parseDouble(inputValue.getText().toString()) * gCoin.getAsk()
                     )
             );
         } else if (fromBitcoin.isChecked() && toReal.isChecked()) {
             getData("BTC-BRL");
             outputValue.setText(
                     String.valueOf(
-                            Double.parseDouble(inputValue.getText().toString()) * gcoin.getAsk()
+                            Double.parseDouble(inputValue.getText().toString()) * gCoin.getAsk()
                     )
             );
         } else if (fromBitcoin.isChecked() && toEtherium.isChecked()) {
             getData("BTC-ETC");
             outputValue.setText(
                     String.valueOf(
-                            Double.parseDouble(inputValue.getText().toString()) * gcoin.getAsk()
+                            Double.parseDouble(inputValue.getText().toString()) * gCoin.getAsk()
                     )
             );
         } else if (fromEtherium.isChecked() && toDollar.isChecked()) {
             getData("ETC-USD");
             outputValue.setText(
                     String.valueOf(
-                            Double.parseDouble(inputValue.getText().toString()) * gcoin.getAsk()
+                            Double.parseDouble(inputValue.getText().toString()) * gCoin.getAsk()
                     )
             );
         } else if (fromEtherium.isChecked() && toEuro.isChecked()) {
             getData("ETC-EUR");
             outputValue.setText(
                     String.valueOf(
-                            Double.parseDouble(inputValue.getText().toString()) * gcoin.getAsk()
+                            Double.parseDouble(inputValue.getText().toString()) * gCoin.getAsk()
                     )
             );
         } else if (fromEtherium.isChecked() && toReal.isChecked()) {
@@ -138,14 +138,14 @@ public class MainActivity extends AppCompatActivity {
             outputValue.setText(
                     String.valueOf(
 
-                            Double.parseDouble(inputValue.getText().toString()) * gcoin.getAsk()
+                            Double.parseDouble(inputValue.getText().toString()) * gCoin.getAsk()
                     )
             );
         } else if (fromEtherium.isChecked() && toBitcoin.isChecked()) {
             getData("ETC-BTC");
             outputValue.setText(
                     String.valueOf(
-                            Double.parseDouble(inputValue.getText().toString()) * gcoin.getAsk()
+                            Double.parseDouble(inputValue.getText().toString()) * gCoin.getAsk()
                     )
             );
         }

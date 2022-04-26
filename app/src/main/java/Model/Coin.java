@@ -2,9 +2,10 @@ package Model;
 
 public class Coin {
     private String code, codein, name, timestamp, create_date;
-    private Float high, low, varBid, pctChange, bid, ask;
+    private Float high, low, varBid, pctChange, bid;
+    private Double ask =0.0;
 
-    public Coin(String code, String codein, String name, String timestamp, String create_date, Float high, Float low, Float varBid, Float pctChange, Float bid, Float ask) {
+    public Coin(String code, String codein, String name, String timestamp, String create_date, Float high, Float low, Float varBid, Float pctChange, Float bid, Double ask) {
         this.code = code;
         this.codein = codein;
         this.name = name;
@@ -98,11 +99,11 @@ public class Coin {
         this.bid = bid;
     }
 
-    public Float getAsk() {
+    public Double getAsk() {
         return ask;
     }
 
-    public void setAsk(Float ask) {
+    public void setAsk(Double ask) {
         this.ask = ask;
     }
 }
