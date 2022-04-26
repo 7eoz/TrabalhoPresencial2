@@ -12,7 +12,8 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-    RadioButton fromReal, fromDollar, fromEuro, toReal, toDollar, toEuro;
+    RadioButton fromReal, fromDollar, fromEuro, fromBitcoin, fromEtherium, toReal, toDollar, toEuro,
+            toBitcoin, toEtherium;
     EditText inputValue;
     Button convertButton;
     TextView outputValue;
@@ -28,9 +29,13 @@ public class MainActivity extends AppCompatActivity {
         fromReal = findViewById(R.id.from_real);
         fromDollar = findViewById(R.id.from_dollar);
         fromEuro = findViewById(R.id.from_euro);
+        fromBitcoin = findViewById(R.id.fromBitcoin);
+        fromEtherium = findViewById(R.id.fromEtherium);
         toReal = findViewById(R.id.to_real);
         toDollar = findViewById(R.id.to_dollar);
         toEuro = findViewById(R.id.to_euro);
+        toBitcoin = findViewById(R.id.toBitcoin);
+        toEtherium = findViewById(R.id.toEtherium);
     }
 
     public void convert(View view) {
@@ -72,9 +77,60 @@ public class MainActivity extends AppCompatActivity {
                             Double.parseDouble(inputValue.getText().toString()) * 1.11
                     )
             );
-        } else if (fromEuro.isChecked() && toEuro.isChecked() ||
+        } else if (fromBitcoin.isChecked() && toDollar.isChecked()) {
+            outputValue.setText(
+                    String.valueOf(
+                            Double.parseDouble(inputValue.getText().toString()) * 1.11
+                    )
+            );
+        } else if (fromBitcoin.isChecked() && toEuro.isChecked()) {
+            outputValue.setText(
+                    String.valueOf(
+                            Double.parseDouble(inputValue.getText().toString()) * 1.11
+                    )
+            );
+        } else if (fromBitcoin.isChecked() && toReal.isChecked()) {
+            outputValue.setText(
+                    String.valueOf(
+                            Double.parseDouble(inputValue.getText().toString()) * 1.11
+                    )
+            );
+        } else if (fromBitcoin.isChecked() && toEtherium.isChecked()) {
+            outputValue.setText(
+                    String.valueOf(
+                            Double.parseDouble(inputValue.getText().toString()) * 1.11
+                    )
+            );
+        } else if (fromEtherium.isChecked() && toDollar.isChecked()) {
+            outputValue.setText(
+                    String.valueOf(
+                            Double.parseDouble(inputValue.getText().toString()) * 1.11
+                    )
+            );
+        } else if (fromEtherium.isChecked() && toEuro.isChecked()) {
+            outputValue.setText(
+                    String.valueOf(
+                            Double.parseDouble(inputValue.getText().toString()) * 1.11
+                    )
+            );
+        } else if (fromEtherium.isChecked() && toReal.isChecked()) {
+            outputValue.setText(
+                    String.valueOf(
+                            Double.parseDouble(inputValue.getText().toString()) * 1.11
+                    )
+            );
+        } else if (fromEtherium.isChecked() && toBitcoin.isChecked()) {
+            outputValue.setText(
+                    String.valueOf(
+                            Double.parseDouble(inputValue.getText().toString()) * 1.11
+                    )
+            );
+        }
+        else if (fromEuro.isChecked() && toEuro.isChecked() ||
                 fromReal.isChecked() && toReal.isChecked() ||
-                fromDollar.isChecked() && toDollar.isChecked()) {
+                fromDollar.isChecked() && toDollar.isChecked() ||
+                fromBitcoin.isChecked() && toBitcoin.isChecked() ||
+                fromEtherium.isChecked() && toEtherium.isChecked()) {
             Toast.makeText(this, "Please select 2 different currencies", Toast.LENGTH_SHORT).show();
         }
     }
