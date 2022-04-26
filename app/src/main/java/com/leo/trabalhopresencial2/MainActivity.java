@@ -11,6 +11,8 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.DecimalFormat;
+
 import API.RetrofitConfig;
 import Model.Coin;
 import retrofit2.Call;
@@ -24,7 +26,8 @@ public class MainActivity extends AppCompatActivity {
     EditText inputValue;
     Button convertButton;
     TextView outputValue;
-    Coin gCoin;
+    Double ask = 0.0;
+    DecimalFormat format = new DecimalFormat("0.00");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,106 +51,35 @@ public class MainActivity extends AppCompatActivity {
 
     public void convert(View view) {
         if (inputValue.getText().length() == 0) {
-            Toast.makeText(this, "Please set a value to be converted", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Please input a value to be converted", Toast.LENGTH_SHORT).show();
         } else if (fromReal.isChecked() && toDollar.isChecked()) {
             getData("BRL-USD");
-            outputValue.setText(
-                    String.valueOf(
-                            Double.parseDouble(inputValue.getText().toString()) * gCoin.getAsk()
-                    )
-            );
         } else if (fromDollar.isChecked() && toReal.isChecked()) {
             getData("USD-BRL");
-            outputValue.setText(
-                    String.valueOf(
-                            Double.parseDouble(inputValue.getText().toString()) * gCoin.getAsk()
-                    )
-            );
         } else if (fromReal.isChecked() && toEuro.isChecked()) {
             getData("BRL-EUR");
-            outputValue.setText(
-                    String.valueOf(
-                            Double.parseDouble(inputValue.getText().toString()) * gCoin.getAsk()
-                    )
-            );
         } else if (fromEuro.isChecked() && toReal.isChecked()) {
             getData("EUR-BRL");
-            outputValue.setText(
-                    String.valueOf(
-                            Double.parseDouble(inputValue.getText().toString())  * gCoin.getAsk()
-                    )
-            );
         } else if (fromDollar.isChecked() && toEuro.isChecked()) {
             getData("USD-EUR");
-            outputValue.setText(
-                    String.valueOf(
-                            Double.parseDouble(inputValue.getText().toString()) * gCoin.getAsk()
-                    )
-            );
         } else if (fromEuro.isChecked() && toDollar.isChecked()) {
             getData("EUR-USD");
-            outputValue.setText(
-                    String.valueOf(
-                            Double.parseDouble(inputValue.getText().toString()) * gCoin.getAsk()
-                    )
-            );
         } else if (fromBitcoin.isChecked() && toDollar.isChecked()) {
             getData("EUR-BRL");
-            outputValue.setText(
-                    String.valueOf(
-                            Double.parseDouble(inputValue.getText().toString()) * gCoin.getAsk()
-                    )
-            );
         } else if (fromBitcoin.isChecked() && toEuro.isChecked()) {
             getData("BTC-EUR");
-            outputValue.setText(
-                    String.valueOf(
-                            Double.parseDouble(inputValue.getText().toString()) * gCoin.getAsk()
-                    )
-            );
         } else if (fromBitcoin.isChecked() && toReal.isChecked()) {
             getData("BTC-BRL");
-            outputValue.setText(
-                    String.valueOf(
-                            Double.parseDouble(inputValue.getText().toString()) * gCoin.getAsk()
-                    )
-            );
         } else if (fromBitcoin.isChecked() && toEtherium.isChecked()) {
             getData("BTC-ETC");
-            outputValue.setText(
-                    String.valueOf(
-                            Double.parseDouble(inputValue.getText().toString()) * gCoin.getAsk()
-                    )
-            );
         } else if (fromEtherium.isChecked() && toDollar.isChecked()) {
             getData("ETC-USD");
-            outputValue.setText(
-                    String.valueOf(
-                            Double.parseDouble(inputValue.getText().toString()) * gCoin.getAsk()
-                    )
-            );
         } else if (fromEtherium.isChecked() && toEuro.isChecked()) {
             getData("ETC-EUR");
-            outputValue.setText(
-                    String.valueOf(
-                            Double.parseDouble(inputValue.getText().toString()) * gCoin.getAsk()
-                    )
-            );
         } else if (fromEtherium.isChecked() && toReal.isChecked()) {
             getData("ETH-BRL");
-            outputValue.setText(
-                    String.valueOf(
-
-                            Double.parseDouble(inputValue.getText().toString()) * gCoin.getAsk()
-                    )
-            );
         } else if (fromEtherium.isChecked() && toBitcoin.isChecked()) {
             getData("ETC-BTC");
-            outputValue.setText(
-                    String.valueOf(
-                            Double.parseDouble(inputValue.getText().toString()) * gCoin.getAsk()
-                    )
-            );
         }
         else if (fromEuro.isChecked() && toEuro.isChecked() ||
                 fromReal.isChecked() && toReal.isChecked() ||
@@ -155,32 +87,43 @@ public class MainActivity extends AppCompatActivity {
                 fromBitcoin.isChecked() && toBitcoin.isChecked() ||
                 fromEtherium.isChecked() && toEtherium.isChecked()) {
             Toast.makeText(this, "Please select 2 different currencies", Toast.LENGTH_SHORT).show();
+        } else if (!fromEuro.isChecked() || !toEuro.isChecked() ||
+                !fromReal.isChecked() || !toReal.isChecked() ||
+                !fromDollar.isChecked() || !toDollar.isChecked() ||
+                !fromBitcoin.isChecked() || !toBitcoin.isChecked() ||
+                !fromEtherium.isChecked() || !toEtherium.isChecked()) {
+            Toast.makeText(this, "Please select a 'From' and a 'To' currency", Toast.LENGTH_SHORT).show();
         }
     }
 
     public void getData (String cot){
-
         ProgressDialog progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage("Consultando Cotação...");
+        progressDialog.setMessage("Checking exchange...");
         progressDialog.show();
 
-
-        Call<Coin> call = new RetrofitConfig().getCoinService().getCoin(cot);
-        call.enqueue(new Callback<Coin>() {
-//
+        Call<Coin[]> call = new RetrofitConfig().getCoinService().getCoin(cot);
+        call.enqueue(new Callback<Coin[]>() {
             @Override
-            public void onResponse(Call<Coin> call, Response<Coin> response) {
+            public void onResponse(Call<Coin[]> call, Response<Coin[]> response) {
                 if(response.isSuccessful()){
-                    Coin coin = response.body();
+                    Coin[] coin = response.body();
                     progressDialog.dismiss();
-                    gCoin = coin;
-
+                    ask = Double.parseDouble(coin[0].getAsk());
+                    outputValue.setText(
+                            String.valueOf(
+                                    format.format(
+                                            Double.parseDouble(
+                                                    inputValue.getText().toString()) * ask
+                                    )
+                            )
+                    );
                 }
             }
 
             @Override
-            public void onFailure(Call<Coin> call, Throwable t) {
-
+            public void onFailure(Call<Coin[]> call, Throwable t) {
+                progressDialog.dismiss();
+                t.printStackTrace();
             }
         });
     }

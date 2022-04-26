@@ -1,23 +1,7 @@
 package Model;
 
 public class Coin {
-    private String code, codein, name, timestamp, create_date;
-    private Float high, low, varBid, pctChange, bid;
-    private Double ask =0.0;
-
-    public Coin(String code, String codein, String name, String timestamp, String create_date, Float high, Float low, Float varBid, Float pctChange, Float bid, Double ask) {
-        this.code = code;
-        this.codein = codein;
-        this.name = name;
-        this.timestamp = timestamp;
-        this.create_date = create_date;
-        this.high = high;
-        this.low = low;
-        this.varBid = varBid;
-        this.pctChange = pctChange;
-        this.bid = bid;
-        this.ask = ask;
-    }
+    String code, codein, name, high, low, varBid, pctChange, bid, ask, timestamp, create_date;
 
     public String getCode() {
         return code;
@@ -43,6 +27,54 @@ public class Coin {
         this.name = name;
     }
 
+    public String getHigh() {
+        return high;
+    }
+
+    public void setHigh(String high) {
+        this.high = high;
+    }
+
+    public String getLow() {
+        return low;
+    }
+
+    public void setLow(String low) {
+        this.low = low;
+    }
+
+    public String getVarBid() {
+        return varBid;
+    }
+
+    public void setVarBid(String varBid) {
+        this.varBid = varBid;
+    }
+
+    public String getPctChange() {
+        return pctChange;
+    }
+
+    public void setPctChange(String pctChange) {
+        this.pctChange = pctChange;
+    }
+
+    public String getBid() {
+        return bid;
+    }
+
+    public void setBid(String bid) {
+        this.bid = bid;
+    }
+
+    public String getAsk() {
+        return ask;
+    }
+
+    public void setAsk(String ask) {
+        this.ask = ask;
+    }
+
     public String getTimestamp() {
         return timestamp;
     }
@@ -59,51 +91,4 @@ public class Coin {
         this.create_date = create_date;
     }
 
-    public Float getHigh() {
-        return high;
-    }
-
-    public void setHigh(Float high) {
-        this.high = high;
-    }
-
-    public Float getLow() {
-        return low;
-    }
-
-    public void setLow(Float low) {
-        this.low = low;
-    }
-
-    public Float getVarBid() {
-        return varBid;
-    }
-
-    public void setVarBid(Float varBid) {
-        this.varBid = varBid;
-    }
-
-    public Float getPctChange() {
-        return pctChange;
-    }
-
-    public void setPctChange(Float pctChange) {
-        this.pctChange = pctChange;
-    }
-
-    public Float getBid() {
-        return bid;
-    }
-
-    public void setBid(Float bid) {
-        this.bid = bid;
-    }
-
-    public Double getAsk() {
-        return ask;
-    }
-
-    public void setAsk(Double ask) {
-        this.ask = ask;
-    }
 }

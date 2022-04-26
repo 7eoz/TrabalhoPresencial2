@@ -7,8 +7,6 @@ import retrofit2.http.GET;
 import retrofit2.http.Path;
 
 public interface CoinService {
-
-    @GET("{condition}/")
-    Call<Coin> getCoin(@Path("condition") String condition);
+    @GET("{condition}")
+    Call<Coin[]> getCoin(@Path("condition") String condition);
 }
-
