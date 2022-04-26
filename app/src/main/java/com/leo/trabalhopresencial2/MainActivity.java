@@ -11,6 +11,7 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import API.RetrofitConfig;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -146,8 +147,8 @@ public class MainActivity extends AppCompatActivity {
         progressDialog.setMessage("Consultando endereço...");
         progressDialog.show();
 
-        Call<> call = new RetrofitConfig().getCEPService().getFullAddress(input.getText().toString());
-        call.enqueue(new Callback<Address>() {
+        Call<> call = new RetrofitConfig().getCoinService().getCoin(input.getText().toString());
+        call.enqueue(new Callback<Coin>() {
 
             @Override
             public void onResponse(Call<Address> call, Response<Address> response) {
